@@ -10,7 +10,8 @@
 
 import router from '@adonisjs/core/services/router'
 import server from '@adonisjs/core/services/server'
-
+import { StatusPageRange, StatusPageRenderer } from '@adonisjs/http-server/types'
+import { ExceptionHandler } from '@adonisjs/http-server'
 /**
  * The error handler is used to convert an exception
  * to a HTTP response.
@@ -47,3 +48,12 @@ export const middleware = router.named({
   guest: () => import('#middleware/guest_middleware'),
   auth: () => import('#middleware/auth_middleware')
 })
+
+
+export default class HttpExceptionHandler extends ExceptionHandler {
+  protected statusPages: Record<StatusPageRange, StatusPageRenderer> = {
+    '404': (_, { view }) => view.render('pages/errors/404'),
+    '500..599': (_, { view }) => view.render('pages/errors/500')
+  }
+}
+
