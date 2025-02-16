@@ -7,6 +7,8 @@
 |
 */
 
+import CampaignController from '#controllers/campaign_controller'
 import router from '@adonisjs/core/services/router'
 
-router.on('/').render('pages/home')
+router.get('/',[CampaignController,'index']);
+router.on('/').renderInertia('home')
