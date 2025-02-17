@@ -1,6 +1,7 @@
+import Campaign from '#models/campaign'
 import { Head } from '@inertiajs/react'
 
-export default function Home() {
+export default function Home(props:{campaigns:Campaign[]}) {
   return (
     <>
       <Head title="Homepage" />
