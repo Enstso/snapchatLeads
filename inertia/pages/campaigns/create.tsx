@@ -1,8 +1,9 @@
 
 import { useState } from 'react';
 import {onCreate,urlsCampaign} from '../../../utils/utilsFront'
+import { router } from '@inertiajs/react';
 export default function CreateCampaignForm() {
-  const [formData, setFormData] = useState<{snapchater:any,url:any,promo:any}>({
+  const [formData] = useState<{snapchater:any,url:any,promo:any}>({
     snapchater: '',
     url: '',
     promo: false,
@@ -12,8 +13,9 @@ export default function CreateCampaignForm() {
   
   const handleSubmit = (e:any) => {
     e.preventDefault();
+    console.log(formData)
     onCreate(urlsCampaign.create,formData);
-    setFormData({ snapchater: '', url: '', promo: false });
+    router.visit('/');
   };
 
   return (
@@ -25,7 +27,7 @@ export default function CreateCampaignForm() {
           <input 
             type="text" 
             name="snapchater" 
-            onChange={(e)=>formData.snapchater=e.target} 
+            onChange={(e)=>formData.snapchater=e.target.value} 
             className="w-full px-3 py-2 border rounded-md" 
             required
           />
@@ -35,7 +37,7 @@ export default function CreateCampaignForm() {
           <input 
             type="text" 
             name="url" 
-            onChange={(e)=>formData.url = e.target} 
+            onChange={(e)=>formData.url = e.target.value} 
             className="w-full px-3 py-2 border rounded-md"
           />
         </div>
@@ -43,7 +45,7 @@ export default function CreateCampaignForm() {
           <input 
             type="checkbox" 
             name="promo"  
-            onChange={(e)=>formData.promo =e.target} 
+            onChange={(e)=>formData.promo =e.target.value} 
             className="mr-2"
           />
           <label className="text-gray-700">Promo</label>

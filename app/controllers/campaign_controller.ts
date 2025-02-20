@@ -6,7 +6,6 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class CampaignController {
     async index({inertia}:HttpContext){
         const campaigns = await Campaign.all();
-        console.log(campaigns);
         return inertia.render('campaigns/index', {campaigns:campaigns});
     }
 
@@ -28,7 +27,8 @@ export default class CampaignController {
     async updateForm({params,inertia}:HttpContext){
         const id:number  = params.id;
         const campaign = await Campaign.findByOrFail({id:id});
-        return inertia.render('campaigns/update',{campaign:campaign});
+        console.log(campaign);
+        return inertia.render('campaigns/update',{props:campaign});
     }
 
     async update({params,request,response}:HttpContext){
