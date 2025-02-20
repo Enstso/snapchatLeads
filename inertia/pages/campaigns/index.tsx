@@ -6,11 +6,11 @@ import { router } from '@inertiajs/react';
 export default function index(campaigns:{campaigns:Campaign[]}) {
     const [campaignList, setCampaignList] = useState(campaigns.campaigns);
 
-    const handleDelete = (id) => {
+    const handleDelete = (id:number) => {
       setCampaignList(campaignList.filter(campaign => campaign.id !== id));
     };
   
-    const handleUpdate = (id) => {
+    const handleUpdate = (id:number) => {
       console.log(`Update campaign with ID: ${id}`);
     };
   

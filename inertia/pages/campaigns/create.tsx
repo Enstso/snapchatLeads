@@ -1,23 +1,18 @@
-import { useState } from 'react';
 
-export default function CampaignForm() {
-  const [formData, setFormData] = useState({
+import { useState } from 'react';
+import {onCreate,urlsCampaign} from '../../../utils/utilsFront'
+export default function CreateCampaignForm() {
+  const [formData, setFormData] = useState<{snapchater:any,url:any,promo:any}>({
     snapchater: '',
     url: '',
     promo: false,
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  
+  
+  const handleSubmit = (e:any) => {
     e.preventDefault();
-    //onCreate(formData);
+    onCreate(urlsCampaign.create,formData);
     setFormData({ snapchater: '', url: '', promo: false });
   };
 
@@ -30,8 +25,7 @@ export default function CampaignForm() {
           <input 
             type="text" 
             name="snapchater" 
-            value={formData.snapchater} 
-            onChange={handleChange} 
+            onChange={(e)=>formData.snapchater=e.target} 
             className="w-full px-3 py-2 border rounded-md" 
             required
           />
@@ -41,17 +35,15 @@ export default function CampaignForm() {
           <input 
             type="text" 
             name="url" 
-            value={formData.url} 
-            onChange={handleChange} 
+            onChange={(e)=>formData.url = e.target} 
             className="w-full px-3 py-2 border rounded-md"
           />
         </div>
         <div className="mb-4 flex items-center">
           <input 
             type="checkbox" 
-            name="promo" 
-            checked={formData.promo} 
-            onChange={handleChange} 
+            name="promo"  
+            onChange={(e)=>formData.promo =e.target} 
             className="mr-2"
           />
           <label className="text-gray-700">Promo</label>
