@@ -2,9 +2,13 @@ import axios from "axios";
 
 
 export const urlsCampaign = {
-    create:'/campaigns/create',
+    create:'/campaigns/create/',
     update:'/campaigns/update/',
     delete:'/campaigns/delete/'
+}
+
+export async function getItems(url:string){
+    return await axios.get(url);
 }
 
 export async function onCreate(url:string,data:any): Promise<void> {

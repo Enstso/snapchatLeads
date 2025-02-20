@@ -2,21 +2,23 @@ import { Head } from '@inertiajs/react'
 import Campaign from '#models/campaign'
 import { useState } from 'react';
 import { router } from '@inertiajs/react';
-
+import { onDelete, urlsCampaign } from '../../../utils/utilsFront';
 export default function index(campaigns:{campaigns:Campaign[]}) {
     const [campaignList, setCampaignList] = useState(campaigns.campaigns);
 
-    const handleDelete = (id:number) => {
+    const handleDelete = async (id:number) => {
+      await onDelete(`${urlsCampaign.delete}${id}`)
       setCampaignList(campaignList.filter(campaign => campaign.id !== id));
     };
   
     const handleUpdate = (id:number) => {
       console.log(`Update campaign with ID: ${id}`);
+      router.visit(`${urlsCampaign.update}${id}`);
     };
   
     const handleCreate = () => {
       console.log('Create new campaign');
-      router.visit('/campaigns/create');
+      router.visit(urlsCampaign.create);
     };
   
     return (
