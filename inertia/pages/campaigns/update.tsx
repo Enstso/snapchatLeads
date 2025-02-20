@@ -1,6 +1,6 @@
 
-import { useEffect, useState } from 'react';
-import {getItems, onCreate,onUpdate,urlsCampaign} from '../../../utils/utilsFront'
+import { useState } from 'react';
+import { onUpdate,urlsCampaign } from '../../../utils/utilsFront'
 import Campaign from '#models/campaign';
 export default function UpdateCampaignForm(campaign:Campaign) {
   const [formData, setFormData] = useState<any>(campaign);
