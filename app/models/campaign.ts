@@ -16,6 +16,9 @@ export default class Campaign extends BaseModel {
 
   @column()
   declare promo: boolean | null
+
+  @column()
+  declare capping: number
   
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
