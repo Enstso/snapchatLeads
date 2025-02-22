@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('snapchater').notNullable() 
       table.string('url').nullable()
       table.boolean('promo').nullable() 
+      table.integer('capping').nullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

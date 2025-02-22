@@ -5,3 +5,7 @@ export function generateUniqueGuid(): string {
     const uniqueId = uuidv4(); // Génération d'un UUID
     return `${uniqueId}-${timestamp}`;
 }
+
+export function getDataFromImport():any{
+    
+}

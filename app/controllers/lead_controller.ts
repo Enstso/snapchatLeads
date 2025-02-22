@@ -6,33 +6,32 @@ import { generateUniqueGuid } from '../../utils/utilsBack.js'
 
 export default class LeadController {
   async index({ inertia, params }: HttpContext) {
-    const id = params.id
-    const campaign = await Campaign.findByOrFail({ id: id })
-    const leads = campaign.leads
-    return inertia.render('leads/index', { leads: leads })
+    const id = params.id;
+    const campaign = await Campaign.findByOrFail({ id: id });
+    const leads = campaign.leads;
+    return inertia.render('leads/index', { leads: leads });
   }
 
-  async create({ params, request, response }: HttpContext) {
-    const { campaign_id, snapchater } = params
-    const url = request.url(true)
+  async callback({ request, response }: HttpContext) {
+    const body = request.all();
+    const { campaign_id, snapchater } = body;
+    const url = request.url(true);
     const campaignExist = await Campaign.findByOrFail({ id: campaign_id, snapchater:snapchater });
 
     if (!campaignExist) {
       response.abort;
     }
-    const tokenResponse = ''
-
-    const accessToken = ''
-
-    const leadResponse = ''
-    const leadFromSnap = 'leadResponse'
-    const username = 'pros..'
-    const snapId = 'pros..'
+    const tokenResponse = '';
+    const accessToken = '';
+    const leadResponse = '';
+    const leadFromSnap = 'leadResponse';
+    const username = 'pros..';
+    const snapId = 'pros..';
 
     let lead = await Lead.findByOrFail({
       username: username,
       campaign_id: campaignExist.id,
-    })
+    });
 
     if (!lead) {
       const newLead = await Lead.create({
@@ -52,16 +51,16 @@ export default class LeadController {
         }
       }
     } else {
-      lead.nbClicked += 1
+      lead.nbClicked += 1;
       lead.save();
     }
     return response.redirect(url);
   }
 
   async delete({ params, response }: HttpContext) {
-    const id = params.id
-    const lead = await Lead.findByOrFail({ id: id })
-    await lead.delete()
-    return response.safeStatus(200).json({ message: 'lead deleted' })
+    const id = params.id;
+    const lead = await Lead.findByOrFail({ id: id });
+    await lead.delete();
+    return response.safeStatus(200).json({ message: 'lead deleted' });
   }
 }
