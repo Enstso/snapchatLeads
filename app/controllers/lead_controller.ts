@@ -8,7 +8,8 @@ export default class LeadController {
   async index({ inertia, params }: HttpContext) {
     const id = params.id;
     const campaign = await Campaign.findByOrFail({ id: id });
-    const leads = campaign.leads;
+    console.log(campaign);
+    const leads = await Lead.findManyBy({campaignId:campaign.id})
     return inertia.render('leads/index', { leads: leads });
   }
 
@@ -37,7 +38,7 @@ export default class LeadController {
       const newLead = await Lead.create({
         username: username,
         nbClicked: 1,
-        campaign_id: campaignExist.id,
+        campaignId: campaignExist.id,
       });
       if (campaignExist.promo) {
         const nbCodesPromo = campaignExist.codes_promo.length
@@ -45,8 +46,8 @@ export default class LeadController {
           await CodePromo.create({
             code: generateUniqueGuid(),
             used: true,
-            campaign_id: campaignExist.id,
-            lead_id: newLead.id,
+            campaignId: campaignExist.id,
+            leadId: newLead.id,
           });
         }
       }
@@ -55,6 +56,12 @@ export default class LeadController {
       lead.save();
     }
     return response.redirect(url);
+  }
+
+  async export({params}:HttpContext) {
+    const campaignId = params.id;
+    const campaigns = await Campaign.findByOrFail({id:campaignId});
+    
   }
 
   async delete({ params, response }: HttpContext) {

@@ -14,11 +14,11 @@ export default class CodePromo extends BaseModel {
   @column()
   declare used: boolean
 
-  @column()
-  declare campaign_id: number
+  @column({ columnName: "campaignId" })
+  declare campaignId: number
 
-  @column()
-  declare lead_id:number
+  @column({ columnName: "leadId" })
+  declare leadId:number
  
   @belongsTo(()=>Campaign)
   declare campaign: BelongsTo<typeof Campaign>

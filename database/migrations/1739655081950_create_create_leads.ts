@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').notNullable()
       table.string('username').notNullable()
       table.integer('nbClicked').defaultTo(1)
-      table.integer('campaign_id').unsigned().references('id').inTable('campaigns').onDelete('CASCADE')
+      table.integer('campaignId').unsigned().references('id').inTable('campaigns').onDelete('CASCADE')
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

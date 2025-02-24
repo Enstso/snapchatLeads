@@ -14,14 +14,14 @@ export default class Lead extends BaseModel {
   @column()
   declare nbClicked: number 
 
-  @column()
-  declare campaign_id: number
+  @column({ columnName: "campaignId" })
+    declare campaignId: number
 
   @belongsTo(()=> Campaign)
   declare campaign: BelongsTo<typeof Campaign>
 
   @hasOne(()=>CodePromo)
-  declare code_promo: HasOne<typeof CodePromo>
+  declare codePromo: HasOne<typeof CodePromo>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
